@@ -1,0 +1,24 @@
+﻿<Window x:Class="Курсач.InsertLend"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Курсач"
+        mc:Ignorable="d"
+        Title="InsertLend" Height="350" Width="300">
+    <Grid>
+        <TextBlock HorizontalAlignment="Left" Margin="108,10,0,0" TextWrapping="Wrap" Text="Data edition" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="27,75,0,0" TextWrapping="Wrap" Text="Book" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="27,123,0,0" TextWrapping="Wrap" Text="Reader" VerticalAlignment="Top"/>
+        <Button Content="Insert" HorizontalAlignment="Left" Margin="96,276,0,0" VerticalAlignment="Top" Width="99" Click="Button_Click"/>
+        <DatePicker x:Name="lendDate" HorizontalAlignment="Left" Height="23" Margin="145,161,0,0"  Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBlock HorizontalAlignment="Left" Margin="27,168,0,0" TextWrapping="Wrap" Text="Lending date" VerticalAlignment="Top"/>
+        <ComboBox x:Name="bookComboBox" HorizontalAlignment="Left" Margin="145,75,0,0" VerticalAlignment="Top" Width="120">
+
+        </ComboBox>
+        <ComboBox x:Name="readerComboBox" HorizontalAlignment="Left" Margin="145,117,0,0" VerticalAlignment="Top" Width="120"/>
+        <DatePicker x:Name="returnDate" HorizontalAlignment="Left" Height="23" Margin="145,199,0,0"  Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBlock HorizontalAlignment="Left" Margin="27,206,0,0" TextWrapping="Wrap" Text="Return date" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>

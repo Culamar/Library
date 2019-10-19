@@ -1,0 +1,23 @@
+﻿<Window x:Class="Курсач.Lists"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Курсач"
+        mc:Ignorable="d"
+        Title="Lists" Height="450" Width="800">
+    <Grid>
+        <ListBox x:Name="bookList" HorizontalAlignment="Left" Height="321" Margin="439,40,0,0" VerticalAlignment="Top" Width="257"/>
+        <ComboBox x:Name="ParamComboBox" HorizontalAlignment="Left" Margin="239,40,0,0" VerticalAlignment="Top" Width="120">
+            <ComboBoxItem Content="Author" HorizontalAlignment="Left" Width="118"/>
+            <ComboBoxItem Content="Publishing house" HorizontalAlignment="Left" Width="118"/>
+            <ComboBoxItem Content="Publishing year" HorizontalAlignment="Left" Width="118"/>
+        </ComboBox>
+        <ComboBox x:Name="apyComboBox" HorizontalAlignment="Left" Margin="239,140,0,0" VerticalAlignment="Top" Width="120"/>
+        <TextBlock HorizontalAlignment="Left" Margin="121,40,0,0" TextWrapping="Wrap" Text="Select parameter" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="121,125,0,0" TextWrapping="Wrap" Text="Author     Publishing house Publishing year" VerticalAlignment="Top" Height="59" Width="101"/>
+        <Button Content="Select" HorizontalAlignment="Left" Margin="239,85,0,0" VerticalAlignment="Top" Width="120" Height="22" Click="Button_Click"/>
+        <Button Content="Show" HorizontalAlignment="Left" Margin="239,200,0,0" VerticalAlignment="Top" Width="120" Height="22" Click="Button_Click_1"/>
+
+    </Grid>
+</Window>

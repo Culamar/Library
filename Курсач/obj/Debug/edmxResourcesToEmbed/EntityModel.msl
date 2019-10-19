@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="wpfCrudModelStoreContainer" CdmEntityContainer="wpfCrudEntities2">
+    <EntitySetMapping Name="Books">
+      <EntityTypeMapping TypeName="wpfCrudModel.Book">
+        <MappingFragment StoreEntitySet="Books">
+          <ScalarProperty Name="Book_id" ColumnName="Book_id" />
+          <ScalarProperty Name="Book_name" ColumnName="Book_name" />
+          <ScalarProperty Name="Author" ColumnName="Author" />
+          <ScalarProperty Name="Publication_year" ColumnName="Publication_year" />
+          <ScalarProperty Name="Publishing_house" ColumnName="Publishing_house" />
+          <ScalarProperty Name="Number_of_pages" ColumnName="Number_of_pages" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BooksReservations">
+      <EntityTypeMapping TypeName="wpfCrudModel.BooksReservation">
+        <MappingFragment StoreEntitySet="BooksReservation">
+          <ScalarProperty Name="Reservation_id" ColumnName="Reservation_id" />
+          <ScalarProperty Name="Book_id" ColumnName="Book_id" />
+          <ScalarProperty Name="Reader_id" ColumnName="Reader_id" />
+          <ScalarProperty Name="Reservation_date" ColumnName="Reservation_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LendingBooks">
+      <EntityTypeMapping TypeName="wpfCrudModel.LendingBook">
+        <MappingFragment StoreEntitySet="LendingBooks">
+          <ScalarProperty Name="Lending_id" ColumnName="Lending_id" />
+          <ScalarProperty Name="Book_id" ColumnName="Book_id" />
+          <ScalarProperty Name="Reader_id" ColumnName="Reader_id" />
+          <ScalarProperty Name="Lending_date" ColumnName="Lending_date" />
+          <ScalarProperty Name="Return_date" ColumnName="Return_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Readers">
+      <EntityTypeMapping TypeName="wpfCrudModel.Reader">
+        <MappingFragment StoreEntitySet="Readers">
+          <ScalarProperty Name="Reader_id" ColumnName="Reader_id" />
+          <ScalarProperty Name="Full_Name" ColumnName="Full_Name" />
+          <ScalarProperty Name="Phone_Number" ColumnName="Phone_Number" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

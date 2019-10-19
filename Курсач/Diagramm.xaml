@@ -1,0 +1,22 @@
+﻿<Window x:Class="Курсач.Diagramm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Курсач"
+        mc:Ignorable="d"
+        Title="Diagramm" Height="494.142" Width="1047.684">
+    <Grid>
+        <TextBlock HorizontalAlignment="Left" Margin="22,141,0,0" TextWrapping="Wrap" Text="Enter Year" VerticalAlignment="Top"/>
+        <TextBox x:Name="yearTextBox" HorizontalAlignment="Left" Height="23" Margin="104,140,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Button Content="Paint" HorizontalAlignment="Left" Margin="59,191,0,0" VerticalAlignment="Top" Width="104" Height="41" Click="Button_Click"/>
+        <Canvas x:Name="diagrmaCanvas" HorizontalAlignment="Left" Height="380" Margin="295,57,0,0" VerticalAlignment="Top" Width="657"/>
+        <TextBlock HorizontalAlignment="Left" Margin="286,57,0,0" TextWrapping="Wrap" Text="N" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="286,321,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="286,221,0,0" TextWrapping="Wrap" Text="2" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="286,121,0,0" TextWrapping="Wrap" Text="3" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="972,437,0,0" TextWrapping="Wrap" Text="Year" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="929,437,0,0" TextWrapping="Wrap" Text="2019" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>

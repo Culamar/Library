@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="wpfCrudModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Book">
+    <Key>
+      <PropertyRef Name="Book_id" />
+    </Key>
+    <Property Name="Book_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Book_name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="Author" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Publication_year" Type="Int32" />
+    <Property Name="Publishing_house" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="Number_of_pages" Type="Int32" />
+    <NavigationProperty Name="BooksReservations" Relationship="Self.FK_BooksReservation_Books" FromRole="Books" ToRole="BooksReservation" />
+    <NavigationProperty Name="LendingBooks" Relationship="Self.FK_LendingBooks_Books" FromRole="Books" ToRole="LendingBooks" />
+  </EntityType>
+  <EntityType Name="BooksReservation">
+    <Key>
+      <PropertyRef Name="Reservation_id" />
+    </Key>
+    <Property Name="Reservation_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Book_id" Type="Int32" />
+    <Property Name="Reader_id" Type="Int32" />
+    <Property Name="Reservation_date" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Book" Relationship="Self.FK_BooksReservation_Books" FromRole="BooksReservation" ToRole="Books" />
+    <NavigationProperty Name="Reader" Relationship="Self.FK_BooksReservation_Readers" FromRole="BooksReservation" ToRole="Readers" />
+  </EntityType>
+  <EntityType Name="LendingBook">
+    <Key>
+      <PropertyRef Name="Lending_id" />
+    </Key>
+    <Property Name="Lending_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Book_id" Type="Int32" />
+    <Property Name="Reader_id" Type="Int32" />
+    <Property Name="Lending_date" Type="DateTime" Precision="0" />
+    <Property Name="Return_date" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Book" Relationship="Self.FK_LendingBooks_Books" FromRole="LendingBooks" ToRole="Books" />
+    <NavigationProperty Name="Reader" Relationship="Self.FK_LendingBooks_Readers" FromRole="LendingBooks" ToRole="Readers" />
+  </EntityType>
+  <EntityType Name="Reader">
+    <Key>
+      <PropertyRef Name="Reader_id" />
+    </Key>
+    <Property Name="Reader_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Full_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Phone_Number" Type="Int32" />
+    <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="BooksReservations" Relationship="Self.FK_BooksReservation_Readers" FromRole="Readers" ToRole="BooksReservation" />
+    <NavigationProperty Name="LendingBooks" Relationship="Self.FK_LendingBooks_Readers" FromRole="Readers" ToRole="LendingBooks" />
+  </EntityType>
+  <Association Name="FK_BooksReservation_Books">
+    <End Role="Books" Type="Self.Book" Multiplicity="0..1" />
+    <End Role="BooksReservation" Type="Self.BooksReservation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Books">
+        <PropertyRef Name="Book_id" />
+      </Principal>
+      <Dependent Role="BooksReservation">
+        <PropertyRef Name="Book_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LendingBooks_Books">
+    <End Role="Books" Type="Self.Book" Multiplicity="0..1" />
+    <End Role="LendingBooks" Type="Self.LendingBook" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Books">
+        <PropertyRef Name="Book_id" />
+      </Principal>
+      <Dependent Role="LendingBooks">
+        <PropertyRef Name="Book_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BooksReservation_Readers">
+    <End Role="Readers" Type="Self.Reader" Multiplicity="0..1" />
+    <End Role="BooksReservation" Type="Self.BooksReservation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Readers">
+        <PropertyRef Name="Reader_id" />
+      </Principal>
+      <Dependent Role="BooksReservation">
+        <PropertyRef Name="Reader_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LendingBooks_Readers">
+    <End Role="Readers" Type="Self.Reader" Multiplicity="0..1" />
+    <End Role="LendingBooks" Type="Self.LendingBook" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Readers">
+        <PropertyRef Name="Reader_id" />
+      </Principal>
+      <Dependent Role="LendingBooks">
+        <PropertyRef Name="Reader_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="wpfCrudEntities2" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Books" EntityType="Self.Book" />
+    <EntitySet Name="BooksReservations" EntityType="Self.BooksReservation" />
+    <EntitySet Name="LendingBooks" EntityType="Self.LendingBook" />
+    <EntitySet Name="Readers" EntityType="Self.Reader" />
+    <AssociationSet Name="FK_BooksReservation_Books" Association="Self.FK_BooksReservation_Books">
+      <End Role="Books" EntitySet="Books" />
+      <End Role="BooksReservation" EntitySet="BooksReservations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LendingBooks_Books" Association="Self.FK_LendingBooks_Books">
+      <End Role="Books" EntitySet="Books" />
+      <End Role="LendingBooks" EntitySet="LendingBooks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BooksReservation_Readers" Association="Self.FK_BooksReservation_Readers">
+      <End Role="Readers" EntitySet="Readers" />
+      <End Role="BooksReservation" EntitySet="BooksReservations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LendingBooks_Readers" Association="Self.FK_LendingBooks_Readers">
+      <End Role="Readers" EntitySet="Readers" />
+      <End Role="LendingBooks" EntitySet="LendingBooks" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

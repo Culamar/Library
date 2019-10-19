@@ -1,0 +1,311 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="wpfCrudModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Books">
+          <Key>
+            <PropertyRef Name="Book_id" />
+          </Key>
+          <Property Name="Book_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Book_name" Type="nchar" MaxLength="50" />
+          <Property Name="Author" Type="nchar" MaxLength="10" />
+          <Property Name="Publication_year" Type="int" />
+          <Property Name="Publishing_house" Type="nchar" MaxLength="50" />
+          <Property Name="Number_of_pages" Type="int" />
+        </EntityType>
+        <EntityType Name="BooksReservation">
+          <Key>
+            <PropertyRef Name="Reservation_id" />
+          </Key>
+          <Property Name="Reservation_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Book_id" Type="int" />
+          <Property Name="Reader_id" Type="int" />
+          <Property Name="Reservation_date" Type="date" />
+        </EntityType>
+        <EntityType Name="LendingBooks">
+          <Key>
+            <PropertyRef Name="Lending_id" />
+          </Key>
+          <Property Name="Lending_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Book_id" Type="int" />
+          <Property Name="Reader_id" Type="int" />
+          <Property Name="Lending_date" Type="date" />
+          <Property Name="Return_date" Type="date" />
+        </EntityType>
+        <EntityType Name="Readers">
+          <Key>
+            <PropertyRef Name="Reader_id" />
+          </Key>
+          <Property Name="Reader_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Full_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone_Number" Type="int" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_BooksReservation_Books">
+          <End Role="Books" Type="Self.Books" Multiplicity="0..1" />
+          <End Role="BooksReservation" Type="Self.BooksReservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Books">
+              <PropertyRef Name="Book_id" />
+            </Principal>
+            <Dependent Role="BooksReservation">
+              <PropertyRef Name="Book_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BooksReservation_Readers">
+          <End Role="Readers" Type="Self.Readers" Multiplicity="0..1" />
+          <End Role="BooksReservation" Type="Self.BooksReservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Readers">
+              <PropertyRef Name="Reader_id" />
+            </Principal>
+            <Dependent Role="BooksReservation">
+              <PropertyRef Name="Reader_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LendingBooks_Books">
+          <End Role="Books" Type="Self.Books" Multiplicity="0..1" />
+          <End Role="LendingBooks" Type="Self.LendingBooks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Books">
+              <PropertyRef Name="Book_id" />
+            </Principal>
+            <Dependent Role="LendingBooks">
+              <PropertyRef Name="Book_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LendingBooks_Readers">
+          <End Role="Readers" Type="Self.Readers" Multiplicity="0..1" />
+          <End Role="LendingBooks" Type="Self.LendingBooks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Readers">
+              <PropertyRef Name="Reader_id" />
+            </Principal>
+            <Dependent Role="LendingBooks">
+              <PropertyRef Name="Reader_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="wpfCrudModelStoreContainer">
+          <EntitySet Name="Books" EntityType="Self.Books" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BooksReservation" EntityType="Self.BooksReservation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LendingBooks" EntityType="Self.LendingBooks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Readers" EntityType="Self.Readers" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_BooksReservation_Books" Association="Self.FK_BooksReservation_Books">
+            <End Role="Books" EntitySet="Books" />
+            <End Role="BooksReservation" EntitySet="BooksReservation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BooksReservation_Readers" Association="Self.FK_BooksReservation_Readers">
+            <End Role="Readers" EntitySet="Readers" />
+            <End Role="BooksReservation" EntitySet="BooksReservation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LendingBooks_Books" Association="Self.FK_LendingBooks_Books">
+            <End Role="Books" EntitySet="Books" />
+            <End Role="LendingBooks" EntitySet="LendingBooks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LendingBooks_Readers" Association="Self.FK_LendingBooks_Readers">
+            <End Role="Readers" EntitySet="Readers" />
+            <End Role="LendingBooks" EntitySet="LendingBooks" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="wpfCrudModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Book">
+          <Key>
+            <PropertyRef Name="Book_id" />
+          </Key>
+          <Property Name="Book_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Book_name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Author" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Publication_year" Type="Int32" />
+          <Property Name="Publishing_house" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Number_of_pages" Type="Int32" />
+          <NavigationProperty Name="BooksReservations" Relationship="Self.FK_BooksReservation_Books" FromRole="Books" ToRole="BooksReservation" />
+          <NavigationProperty Name="LendingBooks" Relationship="Self.FK_LendingBooks_Books" FromRole="Books" ToRole="LendingBooks" />
+        </EntityType>
+        <EntityType Name="BooksReservation">
+          <Key>
+            <PropertyRef Name="Reservation_id" />
+          </Key>
+          <Property Name="Reservation_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Book_id" Type="Int32" />
+          <Property Name="Reader_id" Type="Int32" />
+          <Property Name="Reservation_date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Book" Relationship="Self.FK_BooksReservation_Books" FromRole="BooksReservation" ToRole="Books" />
+          <NavigationProperty Name="Reader" Relationship="Self.FK_BooksReservation_Readers" FromRole="BooksReservation" ToRole="Readers" />
+        </EntityType>
+        <EntityType Name="LendingBook">
+          <Key>
+            <PropertyRef Name="Lending_id" />
+          </Key>
+          <Property Name="Lending_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Book_id" Type="Int32" />
+          <Property Name="Reader_id" Type="Int32" />
+          <Property Name="Lending_date" Type="DateTime" Precision="0" />
+          <Property Name="Return_date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Book" Relationship="Self.FK_LendingBooks_Books" FromRole="LendingBooks" ToRole="Books" />
+          <NavigationProperty Name="Reader" Relationship="Self.FK_LendingBooks_Readers" FromRole="LendingBooks" ToRole="Readers" />
+        </EntityType>
+        <EntityType Name="Reader">
+          <Key>
+            <PropertyRef Name="Reader_id" />
+          </Key>
+          <Property Name="Reader_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Full_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone_Number" Type="Int32" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BooksReservations" Relationship="Self.FK_BooksReservation_Readers" FromRole="Readers" ToRole="BooksReservation" />
+          <NavigationProperty Name="LendingBooks" Relationship="Self.FK_LendingBooks_Readers" FromRole="Readers" ToRole="LendingBooks" />
+        </EntityType>
+        <Association Name="FK_BooksReservation_Books">
+          <End Role="Books" Type="Self.Book" Multiplicity="0..1" />
+          <End Role="BooksReservation" Type="Self.BooksReservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Books">
+              <PropertyRef Name="Book_id" />
+            </Principal>
+            <Dependent Role="BooksReservation">
+              <PropertyRef Name="Book_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LendingBooks_Books">
+          <End Role="Books" Type="Self.Book" Multiplicity="0..1" />
+          <End Role="LendingBooks" Type="Self.LendingBook" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Books">
+              <PropertyRef Name="Book_id" />
+            </Principal>
+            <Dependent Role="LendingBooks">
+              <PropertyRef Name="Book_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BooksReservation_Readers">
+          <End Role="Readers" Type="Self.Reader" Multiplicity="0..1" />
+          <End Role="BooksReservation" Type="Self.BooksReservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Readers">
+              <PropertyRef Name="Reader_id" />
+            </Principal>
+            <Dependent Role="BooksReservation">
+              <PropertyRef Name="Reader_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LendingBooks_Readers">
+          <End Role="Readers" Type="Self.Reader" Multiplicity="0..1" />
+          <End Role="LendingBooks" Type="Self.LendingBook" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Readers">
+              <PropertyRef Name="Reader_id" />
+            </Principal>
+            <Dependent Role="LendingBooks">
+              <PropertyRef Name="Reader_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="wpfCrudEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Books" EntityType="Self.Book" />
+          <EntitySet Name="BooksReservations" EntityType="Self.BooksReservation" />
+          <EntitySet Name="LendingBooks" EntityType="Self.LendingBook" />
+          <EntitySet Name="Readers" EntityType="Self.Reader" />
+          <AssociationSet Name="FK_BooksReservation_Books" Association="Self.FK_BooksReservation_Books">
+            <End Role="Books" EntitySet="Books" />
+            <End Role="BooksReservation" EntitySet="BooksReservations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LendingBooks_Books" Association="Self.FK_LendingBooks_Books">
+            <End Role="Books" EntitySet="Books" />
+            <End Role="LendingBooks" EntitySet="LendingBooks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BooksReservation_Readers" Association="Self.FK_BooksReservation_Readers">
+            <End Role="Readers" EntitySet="Readers" />
+            <End Role="BooksReservation" EntitySet="BooksReservations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LendingBooks_Readers" Association="Self.FK_LendingBooks_Readers">
+            <End Role="Readers" EntitySet="Readers" />
+            <End Role="LendingBooks" EntitySet="LendingBooks" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="wpfCrudModelStoreContainer" CdmEntityContainer="wpfCrudEntities2">
+          <EntitySetMapping Name="Books">
+            <EntityTypeMapping TypeName="wpfCrudModel.Book">
+              <MappingFragment StoreEntitySet="Books">
+                <ScalarProperty Name="Book_id" ColumnName="Book_id" />
+                <ScalarProperty Name="Book_name" ColumnName="Book_name" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="Publication_year" ColumnName="Publication_year" />
+                <ScalarProperty Name="Publishing_house" ColumnName="Publishing_house" />
+                <ScalarProperty Name="Number_of_pages" ColumnName="Number_of_pages" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BooksReservations">
+            <EntityTypeMapping TypeName="wpfCrudModel.BooksReservation">
+              <MappingFragment StoreEntitySet="BooksReservation">
+                <ScalarProperty Name="Reservation_id" ColumnName="Reservation_id" />
+                <ScalarProperty Name="Book_id" ColumnName="Book_id" />
+                <ScalarProperty Name="Reader_id" ColumnName="Reader_id" />
+                <ScalarProperty Name="Reservation_date" ColumnName="Reservation_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LendingBooks">
+            <EntityTypeMapping TypeName="wpfCrudModel.LendingBook">
+              <MappingFragment StoreEntitySet="LendingBooks">
+                <ScalarProperty Name="Lending_id" ColumnName="Lending_id" />
+                <ScalarProperty Name="Book_id" ColumnName="Book_id" />
+                <ScalarProperty Name="Reader_id" ColumnName="Reader_id" />
+                <ScalarProperty Name="Lending_date" ColumnName="Lending_date" />
+                <ScalarProperty Name="Return_date" ColumnName="Return_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Readers">
+            <EntityTypeMapping TypeName="wpfCrudModel.Reader">
+              <MappingFragment StoreEntitySet="Readers">
+                <ScalarProperty Name="Reader_id" ColumnName="Reader_id" />
+                <ScalarProperty Name="Full_Name" ColumnName="Full_Name" />
+                <ScalarProperty Name="Phone_Number" ColumnName="Phone_Number" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
